@@ -1,16 +1,126 @@
 ---
-
+import "../styles/global.css";
+import "leaflet/dist/leaflet.css";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<html lang="es" class="bg-amber-50">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Map</title>
+  </head>
+  <body class="max-w-5xl mx-auto p-4">
+    <div
+      class="flex flex-col md:flex-row gap-4 items-center text-center md:text-left border-b-2 border-slate-500 pb-4"
+    >
+      <img class="size-40" src="/logo7kan.png" alt="Logo 7Kan" />
+      <div>
+        <h1 class="text-3xl font-bold text-slate-600">Grupo 7 Kan</h1>
+        <p class="text-xl text-slate-500">
+          Proyecto: Limpieza Campo Solares - Bordo La Esmeralda
+        </p>
+      </div>
+    </div>
+    <section class="my-4 text-slate-600 pb-20">
+      <p class="text-xl text-slate-700 font-bold">
+        🗺️Pónnganse truchas, banda!!
+      </p>
+      <p class="my-4">
+        Chequen el mapa porque ahí están marcados los puntos donde hay más
+        basura. Sí, ya sé... en todo el camino hay cochinero, pero esos lugares
+        son como el <em class="text-red-800 font-semibold"
+          >nivel final del boss del tiradero 😅</em
+        >.
+      </p>
+      <p class="my-4">
+        La misión, si deciden aceptarla (y obvio sí), es que tú y tu patrulla se
+        pongan en modo <em class="text-red-800 font-semibold"
+          >a dejar esto más limpio que nuestra conciencia antes del campamento”</em
+        >.
+      </p>
+      <p class="my-4">
+        Ya se la saben: <em class="text-red-800 font-semibold"
+          >Scout ama y protege la naturaleza”</em
+        >, así que aquí es donde demostramos que <strong
+          >sí traemos el uniforme, pero también el compromiso</strong
+        >. 🌍💚
+      </p>
+      <p class="my-4">
+        💪Saquen el espíritu de equipo, ayúdense entre todos y no se rajen. <em
+          class="text-red-800 font-semibold"
+          >“El Scout es útil y ayuda a los demás sin esperar recompensa”</em
+        >, y aunque no haya likes ni followers por esto… ¡ustedes saben que el
+        planeta se los va a agradecer cañón! 🙌
+      </p>
+      <p class="my-4">
+        <strong>
+          Piensen que esto es como un challenge real de vida, no de TikTok.
+        </strong>
+      </p>
+      <ul>
+        <li>👉 Deja el lugar más limpio de como lo encontraste.</li>
+        <li>
+          👉 Y si andan cansados, acuérdense que “el Scout ve en la dificultad
+          una oportunidad para servir”.Si ves basura, no la ignores como si
+          fuera mensaje de tu ex.
+        </li>
+        <li>
+          👉 Y si andan cansados, acuérdense que <em
+            class="text-red-800 font-semibold"
+            >Scout ve en la dificultad una oportunidad para servir”</em
+          >.
+        </li>
+      </ul>
+      <p class="my-4 text-xl">
+        <strong>
+          🔥Así que vámonos recio, porque los Scouts no solo acampamos… también
+          dejamos huella chida. 🦶🌿✨
+        </strong>
+      </p>
+      <div
+        class="mt-8 aspect-video portrait:aspect-square max-w-full rounded-xl shadow-xl ring-4 ring-amber-400"
+        id="map"
+      >
+      </div>
+      <p class="text-4xl text-center text-slate-500 mt-8">
+        <strong> ¡Scouts siempre, listos! </strong>
+      </p>
+    </section>
+  </body>
+
+  <script>
+    import * as L from "leaflet";
+    import "leaflet-gpx";
+
+    const map = L.map("map").setView([20.386537, -99.938302], 18);
+
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution:
+        "&copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>",
+    }).addTo(map);
+
+    const marker = L.marker([20.386537, -99.938302]).addTo(map);
+    marker.bindPopup("<b>Punto de reunión<b>").openPopup();
+
+    const gpxFile = new L.GPX("/map.gpx", {
+      async: true,
+      marker_options: {
+        startIconURL: "pin-icon-start.png",
+        endIconUrl: "pin-icon-end.png",
+        shadowUrl: "pin-shadow.png",
+      },
+      polyline_options: {
+        color: "#ffd700",
+        weight: 5,
+        opacity: 0.7,
+      },
+    })
+      .on("loaded", ({ target }) => {
+        map.fitBounds(target.getBounds());
+      })
+      .addTo(map);
+  </script>
 </html>
