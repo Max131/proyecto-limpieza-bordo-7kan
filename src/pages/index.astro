@@ -9,7 +9,9 @@ import "leaflet/dist/leaflet.css";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>Map</title>
+    <title>
+      Proyecto limpieza Campo Solares/Bordo La Esmeralda | Grupo 7 Kan
+    </title>
   </head>
   <body class="max-w-5xl mx-auto p-4">
     <div
@@ -93,6 +95,9 @@ import "leaflet/dist/leaflet.css";
   <script>
     import * as L from "leaflet";
     import "leaflet-gpx";
+    import startIcon from "leaflet-gpx/pin-icon-start.png";
+    import endIcon from "leaflet-gpx/pin-icon-end.png";
+    import shadowIcon from "leaflet-gpx/pin-shadow.png";
 
     const map = L.map("map").setView([20.386537, -99.938302], 18);
 
@@ -108,9 +113,9 @@ import "leaflet/dist/leaflet.css";
     const gpxFile = new L.GPX("/map.gpx", {
       async: true,
       marker_options: {
-        startIconURL: "pin-icon-start.png",
-        endIconUrl: "pin-icon-end.png",
-        shadowUrl: "pin-shadow.png",
+        startIconUrL: startIcon,
+        endIconUrl: endIcon,
+        shadowUrl: shadowIcon,
       },
       polyline_options: {
         color: "#ffd700",
