@@ -10,7 +10,7 @@ import "leaflet/dist/leaflet.css";
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>
-      Proyecto limpieza Campo Solares/Bordo La Esmeralda | Grupo 7 Kan
+      Proyecto Limpieza Campo Solares/Bordo La Esmeralda | Grupo 7 Kan
     </title>
   </head>
   <body class="max-w-5xl mx-auto p-4">
@@ -95,10 +95,6 @@ import "leaflet/dist/leaflet.css";
   <script>
     import * as L from "leaflet";
     import "leaflet-gpx";
-    import startIcon from "leaflet-gpx/pin-icon-start.png";
-    import endIcon from "leaflet-gpx/pin-icon-end.png";
-    import shadowIcon from "leaflet-gpx/pin-shadow.png";
-
     const map = L.map("map").setView([20.386537, -99.938302], 18);
 
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -112,11 +108,6 @@ import "leaflet/dist/leaflet.css";
 
     const gpxFile = new L.GPX("/map.gpx", {
       async: true,
-      marker_options: {
-        startIconUrL: startIcon,
-        endIconUrl: endIcon,
-        shadowUrl: shadowIcon,
-      },
       polyline_options: {
         color: "#ffd700",
         weight: 5,
