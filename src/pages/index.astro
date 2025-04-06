@@ -129,19 +129,23 @@ import "leaflet/dist/leaflet.css";
       })
       .addTo(map);
 
+    const markerPos = L.marker([0, 0], { icon: iconLis }).addTo(map);
+
     map.locate({
       setView: false,
       maxZoom: 18,
       enableHightAccuracy: true,
       watch: true,
     });
+
     map.on("locationfound", (e) => {
       const radius = e.accuracy;
 
-      L.marker(e.latlng, {
+      markerPos.setLatLng(e.latlng);
+      /* L.marker(e.latlng, {
         icon: iconLis,
-      }).addTo(map);
-      L.circle(e.latlng, radius).addTo(map);
+      }).addTo(map); */
+      // L.circle(e.latlng, radius).addTo(map);
     });
 
     map.on("locationerror", (e) => {
